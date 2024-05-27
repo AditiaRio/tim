@@ -149,22 +149,25 @@
 
     <script>
         function handleLogout() {
-            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            fetch('{{ route('logout') }}', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                credentials: 'same-origin'
-            })
-            .then(response => {
-                if (response.ok) {
-                    window.location.href = 'register';
-                }
-            })
-            .catch(error => console.error('Error:', error));
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    fetch('{{ route('logout') }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRF-TOKEN': csrfToken
+        },
+        credentials: 'same-origin'
+    })
+    .then(response => {
+        if (response.ok) {
+            window.location.href = '/login'; // atau URL lain sesuai kebutuhan
+        } else {
+            console.error('Logout failed:', response.statusText);
         }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
         </script>
         
 </body>
